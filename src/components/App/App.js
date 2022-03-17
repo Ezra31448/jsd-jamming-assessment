@@ -6,7 +6,7 @@ import { useState, useEffect} from 'react';
 
 const App = () => {
   const [searchResults, setSearchResults] = useState('');
-  const [playlistName, setPlaylistName] = useState('');
+  const [playlistName, setPlaylistName] = useState('New Playlist');
   const [playlistTrack, setPlaylistTrack] = useState([]);
 
   const addTrack = (track) => {
@@ -22,8 +22,16 @@ const App = () => {
   };
 
   const updatePlaylistName = (name) => {
-    setPlaylistTrack(name)
-  }
+    setPlaylistName(name)
+  };
+
+  const savePlaylist = () => {
+    const trackURIs = playlistTrack.map((track) => track.uri);
+  };
+
+  const search = (searchTerm) => {
+    console.log(searchTerm);
+  };
 
   return (
     <div>
@@ -31,7 +39,7 @@ const App = () => {
         Ja<span className="highlight">mmm</span>ing
       </h1>
       <div className="App">
-        <SearchBar />
+        <SearchBar onSearch={search}/>
         <div className="App-playlist">
           <SearchResults 
             searchResults={searchResults}
@@ -41,6 +49,7 @@ const App = () => {
                     playlistTrack={playlistTrack}
                     onNameChange={updatePlaylistName}
                     onRemove={removeTrack}
+                    onSave={savePlaylist}
           />
         </div>
       </div>
