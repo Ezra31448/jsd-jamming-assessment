@@ -2,12 +2,18 @@ import "./App.css";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
+import Spotify from "../../utils/Spotify";
 
 const App = () => {
-  const [searchResults, setSearchResults] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
   const [playlistName, setPlaylistName] = useState('New Playlist');
   const [playlistTrack, setPlaylistTrack] = useState([]);
+
+  useEffect(() => {
+    Spotify.getAccessToken();
+    console.log(`in use effect`);
+  }, [])
 
   const addTrack = (track) => {
     if(playlistTrack.find((prevTrack) => prevTrack.id === track.id)){
@@ -30,7 +36,10 @@ const App = () => {
   };
 
   const search = (searchTerm) => {
-    console.log(searchTerm);
+    Spotify.search(searchTerm).then((tracks)=> {
+      console.log(tracks);
+      setSearchResults(tracks);
+    });
   };
 
   return (

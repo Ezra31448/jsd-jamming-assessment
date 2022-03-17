@@ -15,7 +15,7 @@ function Track({ track, isRemoval, onAdd, onRemove }) {
         <button className="Track-action" onClick={addTrack}>
           +
         </button>
-      );
+      )
     }
   };
 
@@ -27,7 +27,7 @@ function Track({ track, isRemoval, onAdd, onRemove }) {
           {track.artist} | {track.album}
         </p>
       </div>
-      {renderAction}
+      {renderAction()}
     </div>
   );
 }

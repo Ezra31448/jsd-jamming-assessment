@@ -1,7 +1,6 @@
-// TODO: Get Client ID from https://developer.spotify.com/dashboard/ and put it here
 const clientId = 'b52333a1ab894bc59cd98831579f8703';
 
-const redirectUri = 'http://localhost:3000/';
+const redirectUri = 'http://localhost:3000';
 const spotifyUrl = `https://accounts.spotify.com/authorize?response_type=token&scope=playlist-modify-public&client_id=${clientId}&redirect_uri=${redirectUri}`;
 let accessToken = undefined;
 let expiresIn = undefined;
@@ -9,8 +8,10 @@ let expiresIn = undefined;
 const Spotify = {
   getAccessToken() {
     if (accessToken) {
+      console.log(accessToken)
       return accessToken;
     }
+    
     const urlAccessToken = window.location.href.match(/access_token=([^&]*)/);
     const urlExpiresIn = window.location.href.match(/expires_in=([^&]*)/);
     if (urlAccessToken && urlExpiresIn) {
@@ -21,6 +22,7 @@ const Spotify = {
     } else {
       window.location = spotifyUrl;
     }
+    console.log(accessToken);
   },
 
   async search(term) {
