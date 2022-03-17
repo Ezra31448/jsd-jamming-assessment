@@ -1,9 +1,18 @@
 import "./TrackList.css";
+import Track from '../Track/Track';
 
-function TrackList(props) {
+function TrackList({lists, onAdd, onRemove, isRemoval}) {
   return (
     <div className="TrackList">
-      {/* <!-- You will add a map method that renders a set of Track components  --> */}
+       {lists && lists.map((track) => (
+           <Track 
+            key = {track.id}
+            track={track}
+            isRemoval = {isRemoval}
+            onAdd = {onAdd}
+            onRemove = {onRemove}
+            />
+       ))}
     </div>
   );
 }

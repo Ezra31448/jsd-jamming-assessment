@@ -1,11 +1,11 @@
 import "./SearchResults.css";
-import TrackList from '../TrackList/TrackList'
-function SearchResults(props) {
+import TrackList from '../TrackList/TrackList';
+
+function SearchResults({searchResults, onAdd}) {
   return (
     <div className="SearchResults">
       <h2>Results</h2>
-      <TrackList />
-      {/* <!-- Add a TrackList component --> */}
+      <TrackList lists = {searchResults} onAdd={onAdd} isRemoval={false}/>
     </div>
   );
 }
